@@ -1,0 +1,56 @@
+<?php
+
+
+
+/*
+ * Implements hook_menu().
+ */ 
+function langgo_migrate_menu() {
+  $items = array();
+
+  $items['admin/config/langgo/langgo-migrate'] = array(
+    'title' => 'Sync database setting',
+    'description' => 'Sync database live site and local site',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('langgo_migrate_setting_form'),
+    'access arguments' => array('langgo migrate config'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'langgo_migrate.admin.inc',
+  );
+  
+  return $items;
+}
+
+/**
+ * 
+ * @return type add permission
+ */
+function langgo_migrate_permission() {
+  return array(
+    'langgo migrate config' => array(
+      'title' => t('Langgo Migrate Config'), 
+      'description' => t('Perform langgo migrate config.'),
+    ),
+  );
+}
+
+
+/**
+ *setup migration
+ */
+
+
+
+// define the source database
+define("OUR_SOURCE_DATABASE", 'drupal7_2');//variable_get('langgo_migrate_database_sync', ''));
+
+/**
+ * hook_migrate_api()
+ */
+
+function langgo_migrate_migrate_api() {
+  $api = array(
+    'api' => 2,
+  );
+  return $api;
+}

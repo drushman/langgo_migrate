@@ -1,0 +1,8 @@
+name = Langgo Migrate
+description = Sysnc databases live site and local site.
+core = 7.x
+configure = admin/config/langgo/langgo-migrate
+package = vietcoop
+
+files[] = langgo_migrate.inc
+files[] = langgo_migrate.module

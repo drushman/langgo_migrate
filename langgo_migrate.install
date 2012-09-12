@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Implement to hook_uninstall()
+ * 
+ */
+function langgo_migrate_uninstall() {
+  langgo_migrate_del_variables();
+  langgo_migrate_disable();
+}  
+
+/**
+ * del variables use in this module
+ */
+function langgo_migrate_del_variables() {
+  variable_del('langgo_migrate_user');
+  variable_del('langgo_migrate_host');
+  variable_del('langgo_migrate_db_url');
+  variable_del('langgo_migrate_tables_ex');
+  variable_del('langgo_migrate_database_sync');
+}
+
+/**
+ * disable all Migration
+ */
+function langgo_migrate_disable() {
+  Migration::deregisterMigration('LanggoMigrateUser');
+  Migration::deregisterMigration('LanggoMigrateRole');
+  Migration::deregisterMigration('LanggoMigratePrep');
+  Migration::deregisterMigration('LanggoMigrateFileCopy');
+}
